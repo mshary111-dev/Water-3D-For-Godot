@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bis1ejqyk51ms"]
+
+[ext_resource type="Shader" uid="uid://dax3blr20dp1c" path="res://Assets/Materials/Shaders/WaterVisualShader.tres" id="1_230ue"]
+[ext_resource type="Script" uid="uid://soh2ig582hs1" path="res://addons/Water/Water.gd" id="2_230ue"]
+[ext_resource type="Script" uid="uid://5w4mjjmeo11p" path="res://addons/Water/BuoyancyManager.gd" id="3_230ue"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cn8o0"]
+render_priority = 0
+shader = ExtResource("1_230ue")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_itgad"]
+material = SubResource("ShaderMaterial_cn8o0")
+size = Vector2(10000, 10000)
+subdivide_width = 2000
+subdivide_depth = 2000
+
+[node name="Water" type="Node3D" unique_id=196732556]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=148244071 groups=["water"]]
+mesh = SubResource("PlaneMesh_itgad")
+skeleton = NodePath("../..")
+script = ExtResource("2_230ue")
+direction_1 = Vector2(1, 0.3)
+direction_2 = Vector2(-0.6, 1)
+direction_3 = Vector2(0.4, -0.8)
+metadata/_vertex_paint_original_path = "res://Scenes/world.scn::PlaneMesh_itgad"
+
+[node name="BuoyancyManager" type="Node3D" parent="." unique_id=96310172]
+script = ExtResource("3_230ue")
+float_force = 10.0
+character_float_strength = 20.0
